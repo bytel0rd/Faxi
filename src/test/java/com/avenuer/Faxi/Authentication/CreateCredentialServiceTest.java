@@ -97,7 +97,7 @@ public class CreateCredentialServiceTest {
                 .thenThrow(new RuntimeException());
 
         assertThatThrownBy(() -> credential.signUp(signUp))
-                .hasMessage("Authentication credentials with e-mail already exist");
+                .hasMessageContaining("Authentication credentials with e-mail already exist");
     }
 
     @Test

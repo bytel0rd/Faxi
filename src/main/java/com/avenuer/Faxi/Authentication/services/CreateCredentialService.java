@@ -12,7 +12,9 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -50,7 +52,7 @@ public class CreateCredentialService {
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new Exception("Authentication credentials with e-mail already exist");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication credentials with e-mail already exist");
         }
 
         return createUserProfile(credential, authCredential);
@@ -86,7 +88,7 @@ public class CreateCredentialService {
     private ROLE confirmRequestedRole(String userAppSecret) {
         if (userAppSecret == null) return  ROLE.USER;
         if (userAppSecret == appSecret) return  ROLE.ADMIN;
-        throw new Exception("Invalid ROLE Requested, please confirm request Parameters");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid ROLE Requested, please confirm request Parameters");
     }
 
 }
