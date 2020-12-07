@@ -13,6 +13,7 @@ public class AuthUtils {
                 .lastName(profile.getLastName())
                 .id(profile.getId())
                 .product(profile.getProduct())
+                .role(authCredential.getRole())
                 .build();
     }
 }
