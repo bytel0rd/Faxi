@@ -28,7 +28,7 @@ public class PasswordService {
         if (passwordHash == null || password == null) {
             throw new Exception("Unmet Password Matching Pre-Condition");
         }
-        return encoder.matches(passwordHash, password);
+        return encoder.matches(password, passwordHash);
     }
 
     public PasswordEncoder getPasswordEncoder() {

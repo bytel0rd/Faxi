@@ -87,7 +87,7 @@ public class CreateCredentialService {
     @SneakyThrows
     private ROLE confirmRequestedRole(String userAppSecret) {
         if (userAppSecret == null) return  ROLE.USER;
-        if (userAppSecret == appSecret) return  ROLE.ADMIN;
+        if (appSecret.equals(userAppSecret)) return  ROLE.ADMIN;
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid ROLE Requested, please confirm request Parameters");
     }
 

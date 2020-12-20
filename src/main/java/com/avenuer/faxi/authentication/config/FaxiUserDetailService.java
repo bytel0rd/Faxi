@@ -17,7 +17,7 @@ public class FaxiUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        val credential = authDoa.findByEmail(username);
+        val credential = authDoa.findOneByEmail(username);
 
         if (credential.isPresent()) {
             return new FaxiUserDetails(credential.get());

@@ -2,6 +2,7 @@ package com.avenuer.faxi.users.Models;
 
 import com.avenuer.faxi.users.enums.Gender;
 import com.avenuer.faxi.users.enums.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +20,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity(name = "user_profiles")
 public class UserProfile {
+
+    @JsonIgnore
     @Id
-    @GeneratedValue
     private UUID id;
     private String firstName;
     private String lastName;

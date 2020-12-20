@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface AuthCredentialDoa extends CrudRepository<AuthCredential, String> {
 
-    Optional<AuthCredential> findByEmail(String email);
+    Optional<AuthCredential> findOneByEmail(String email);
 }

@@ -2,14 +2,17 @@ package com.avenuer.faxi.authentication.models;
 
 import com.avenuer.faxi.authentication.enums.ROLE.ROLE;
 import com.avenuer.faxi.users.enums.Product;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.apache.catalina.Role;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthProfile {
     private UUID id;
     private String firstName;

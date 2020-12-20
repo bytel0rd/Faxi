@@ -1,6 +1,9 @@
 package com.avenuer.faxi.authentication.services;
 
 import com.avenuer.faxi.authentication.models.AuthProfile;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -62,8 +65,12 @@ public class JWTService {
                     .parseClaimsJws(token)
                     .getBody();
 
-            return AuthProfile.builder().build();
-        } catch (RuntimeException  e) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            return mapper.readValue(mapper.writeValueAsString(body), AuthProfile.class);
+
+        } catch (Exception  e) {
 
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
