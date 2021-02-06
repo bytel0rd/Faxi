@@ -68,9 +68,16 @@ public class CreateCredentialService {
                     .userId(authCredential.getId())
                     .build();
 
-            UserProfile profile = users.createUser(user);
+            AuthProfile authProfile = AuthProfile.builder()
+                    .id(user.getUserId())
+                    .role(authCredential.getRole())
+                    .email(authCredential.getEmail())
+                    .firstName(user.getFirstName())
+                    .lastName(user.getLastName())
+                    .build();
 
-            AuthProfile authProfile = AuthUtils.createAuthProfile(authCredential, profile);
+            UserProfile profile = users.createUser(authProfile, user);
+            authProfile.setProduct(profile.getProduct());
 
             return authProfile;
 
@@ -86,8 +93,8 @@ public class CreateCredentialService {
 
     @SneakyThrows
     private ROLE confirmRequestedRole(String userAppSecret) {
-        if (userAppSecret == null) return  ROLE.USER;
-        if (appSecret.equals(userAppSecret)) return  ROLE.ADMIN;
+        if (userAppSecret == null) return ROLE.USER;
+        if (appSecret.equals(userAppSecret)) return ROLE.ADMIN;
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid ROLE Requested, please confirm request Parameters");
     }
 

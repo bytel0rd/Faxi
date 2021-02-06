@@ -1,5 +1,6 @@
 package com.avenuer.faxi.users.Services;
 
+import com.avenuer.faxi.authentication.models.AuthProfile;
 import com.avenuer.faxi.users.Models.UserProfile;
 import com.avenuer.faxi.users.Params.CreateUserParam;
 import com.avenuer.faxi.users.doa.UserRepository;
@@ -21,16 +22,26 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public UserProfile createUser(CreateUserParam user) {
+    public UserProfile createUser(AuthProfile currentUser, CreateUserParam user) {
+
         var profile = UserProfile.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getFirstName())
                 .gender(null)
                 .id(user.getUserId())
                 .product(Product.USER)
+                .modifiedBy(currentUser.fullName())
                 .build();
 
         return userRepo.save(profile);
+    }
+
+    public UserProfile updateUser(AuthProfile currentUser, UserProfile profileUpdate) {
+
+        profileUpdate.setModifiedBy(currentUser.fullName());
+
+        return userRepo.save(profileUpdate);
+
     }
 
     public Optional<UserProfile> getUserById(String id) {

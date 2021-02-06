@@ -3,6 +3,7 @@ package com.avenuer.faxi.authentication.services;
 import com.avenuer.faxi.authentication.models.AuthCredential;
 import com.avenuer.faxi.authentication.models.AuthProfile;
 import com.avenuer.faxi.users.Models.UserProfile;
+import com.avenuer.faxi.users.Params.CreateUserParam;
 
 public class AuthUtils {
 
@@ -16,4 +17,5 @@ public class AuthUtils {
                 .role(authCredential.getRole())
                 .build();
     }
+
 }

@@ -3,6 +3,7 @@ package com.avenuer.faxi.authentication;
 import com.avenuer.faxi.authentication.doa.AuthCredentialDoa;
 import com.avenuer.faxi.authentication.enums.ROLE.ROLE;
 import com.avenuer.faxi.authentication.models.AuthCredential;
+import com.avenuer.faxi.authentication.models.AuthProfile;
 import com.avenuer.faxi.authentication.params.SignUpParam;
 import com.avenuer.faxi.authentication.services.CreateCredentialService;
 import com.avenuer.faxi.authentication.services.PasswordService;
@@ -13,18 +14,21 @@ import com.avenuer.faxi.users.enums.Product;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class CreateCredentialServiceTest {
 
@@ -42,6 +46,15 @@ public class CreateCredentialServiceTest {
 
     @Value("faxi.app.secret")
     private String appSecret;
+
+    private final AuthProfile currentAuthUser = AuthProfile.builder()
+            .id(UUID.randomUUID())
+            .email("emeka_micheal@faxi.com")
+            .role(ROLE.USER)
+            .firstName("Emeka")
+            .lastName("Micheal")
+            .product(Product.USER)
+            .build();
 
     private SignUpParam signUp;
 
@@ -79,7 +92,7 @@ public class CreateCredentialServiceTest {
             return cred;
         });
 
-        Mockito.when(users.createUser(Mockito.any(CreateUserParam.class)))
+        Mockito.when(users.createUser(currentAuthUser, Mockito.any(CreateUserParam.class)))
                 .thenAnswer((invocation) -> {
                     CreateUserParam param = invocation.getArgument(0);
                     return UserProfile.builder().id(param.getUserId()).build();
@@ -112,7 +125,7 @@ public class CreateCredentialServiceTest {
             return cred;
         });
 
-        Mockito.when(users.createUser(Mockito.any(CreateUserParam.class)))
+        Mockito.when(users.createUser(Mockito.any(AuthProfile.class), Mockito.any(CreateUserParam.class)))
                 .thenAnswer((invocation) -> {
                     CreateUserParam param = invocation.getArgument(0);
                     return UserProfile.builder().id(param.getUserId()).build();
