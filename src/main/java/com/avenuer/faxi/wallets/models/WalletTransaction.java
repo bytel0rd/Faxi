@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class WalletTransaction {
 
     @JsonIgnore
     @Id
+    @GeneratedValue
     private UUID id;
 
     private double amount;
@@ -32,6 +34,9 @@ public class WalletTransaction {
 
     @Column(nullable = false)
     private String userId;
+
+    @Column(nullable = false)
+    private String modifiedBy;
 
     @CreatedDate
     private Date dateCreated;

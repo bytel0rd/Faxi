@@ -1,8 +1,11 @@
 package com.avenuer.faxi.authentication;
 
+import com.avenuer.faxi.authentication.doa.AuthCredentialDoa;
 import com.avenuer.faxi.authentication.models.AuthProfile;
 import com.avenuer.faxi.authentication.services.AuthenticationService;
+import com.avenuer.faxi.users.doa.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,10 +20,28 @@ public class AuthServiceTest {
     @Autowired
     AuthenticationService authSvc;
 
+    @Mock
+    AuthCredentialDoa authDao;
+
+
+    @Mock
+    UserRepository userDao;
+
+    @Test
+    void profileNotFoundError() {
+
+    }
+
+    @Test
+    void wrongPasswordError() {
+
+    }
+
     @Test
     void login() {
 
     }
+
 
     @Test
     void invalidTokenValidation() {

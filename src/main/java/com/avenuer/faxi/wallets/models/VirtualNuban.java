@@ -1,6 +1,7 @@
 package com.avenuer.faxi.wallets.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.avenuer.faxi.wallets.enums.Currency;
+import com.avenuer.faxi.wallets.enums.PaymentGateway;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,30 +19,30 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "wallets")
-public class Wallet {
+@Entity(name = "virtual_nubans")
+public class VirtualNuban {
 
-    @JsonIgnore
     @Id
     @GeneratedValue
     private UUID id;
+    private UUID userId;
 
-    private double availableBalance = 0;
+    private String accountNumber;
+    private String bankName;
+    private Currency currency;
+    private Boolean isActive = true;
 
-    private double totalBalance = 0;
+    private String accountReference;
+    private String issuerReference;
 
-    @Column(nullable = false)
+    private PaymentGateway issuer;
+
+    private String createdBy;
     private String modifiedBy;
-
-    @Column(unique = true, nullable = false)
-    private String userId;
-
-    @CreatedDate
-    private Date dateCreated;
 
     @LastModifiedDate
     private Date dateModified;
+    @CreatedDate
+    private String dateCreated;
 
-    @Column(nullable = false)
-    private String createdBy;
 }

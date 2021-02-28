@@ -1,4 +1,4 @@
-package com.avenuer.faxi.shared;
+package com.avenuer.faxi.shared.configs;
 
 import com.avenuer.faxi.authentication.config.FaxiUserDetailService;
 import com.avenuer.faxi.authentication.services.PasswordService;
