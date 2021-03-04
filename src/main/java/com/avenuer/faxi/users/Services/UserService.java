@@ -26,7 +26,7 @@ public class UserService {
 
         var profile = UserProfile.builder()
                 .firstName(user.getFirstName())
-                .lastName(user.getFirstName())
+                .lastName(user.getLastName())
                 .gender(null)
                 .id(user.getUserId())
                 .product(Product.USER)

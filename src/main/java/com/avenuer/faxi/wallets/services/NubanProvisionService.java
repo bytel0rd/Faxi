@@ -3,7 +3,6 @@ package com.avenuer.faxi.wallets.services;
 import com.avenuer.faxi.shared.Utilities;
 import com.avenuer.faxi.thirdparties.flutterwave.params.FlutterWareNubanReq;
 import com.avenuer.faxi.thirdparties.flutterwave.services.FlutterWaveNubanService;
-import com.avenuer.faxi.wallets.dao.VirtualNubanDao;
 import com.avenuer.faxi.wallets.enums.Currency;
 import com.avenuer.faxi.wallets.enums.PaymentGateway;
 import com.avenuer.faxi.wallets.models.VirtualNuban;
