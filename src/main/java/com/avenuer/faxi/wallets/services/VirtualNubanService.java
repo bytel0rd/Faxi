@@ -42,6 +42,9 @@ public class VirtualNubanService {
 
             nuban =  nubanProvisionService.create(nubanReq);
 
+            nuban.setUserId(nubanReq.getUserId());
+            nuban.setCreatedBy(auth.fullName());
+
             nuban = nubanDao.save(nuban);
 
             return nuban;
@@ -83,7 +86,14 @@ public class VirtualNubanService {
     }
 
     public VirtualNuban update(AuthProfile authProfile, VirtualNuban nuban) {
+        Optional<VirtualNuban> nubanInformation = nubanDao.findByUserId(nuban.getUserId());
+
+        if (!nubanInformation.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Virtual Nuban Not Found");
+        }
+
         nuban.setModifiedBy(authProfile.fullName());
+
         return nubanDao.save(nuban);
     }
 
