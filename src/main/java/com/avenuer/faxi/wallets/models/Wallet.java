@@ -35,7 +35,7 @@ public class Wallet {
     private String modifiedBy;
 
     @Column(unique = true, nullable = false)
-    private String userId;
+    private String ownerId;
 
     @CreatedDate
     private Date dateCreated;

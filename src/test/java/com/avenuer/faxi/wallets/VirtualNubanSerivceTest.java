@@ -41,7 +41,7 @@ public class VirtualNubanSerivceTest {
                 .email("emeka_micheal_001@billford.africa")
                 .currency(Currency.USD)
                 .nubanProvider(PaymentGateway.FLUTTERWAVE)
-                .userId(UUID.fromString("a4d02a63-f93b-4e6f-b645-ef47fc6c9a03"))
+                .ownerId(UUID.fromString("a4d02a63-f93b-4e6f-b645-ef47fc6c9a03"))
                 .build();
 
         VirtualNuban nuban = virtualNuban.create(auth, req);
