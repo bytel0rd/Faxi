@@ -22,7 +22,6 @@ import java.util.UUID;
 @Entity(name = "wallets")
 public class Wallet {
 
-    @JsonIgnore
     @Id
     @GeneratedValue
     private UUID id;
@@ -35,7 +34,7 @@ public class Wallet {
     private String modifiedBy;
 
     @Column(unique = true, nullable = false)
-    private String ownerId;
+    private UUID ownerId;
 
     @CreatedDate
     private Date dateCreated;

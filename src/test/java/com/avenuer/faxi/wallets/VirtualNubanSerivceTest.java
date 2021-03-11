@@ -8,7 +8,6 @@ import com.avenuer.faxi.wallets.enums.PaymentGateway;
 import com.avenuer.faxi.wallets.models.VirtualNuban;
 import com.avenuer.faxi.wallets.params.CreateNubanParam;
 import com.avenuer.faxi.wallets.services.VirtualNubanService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
