@@ -36,11 +36,11 @@ public class TraditionalBankingInformationService {
     }
 
     TraditionalBankingInformation updateBankInformation(AuthProfile currentUser, TraditionalAccountUpdateParam accountInformation) {
-        TraditionalBankingInformation accountDetailsToUpdate = traditionalBankingDoa.findByUserId(accountInformation.getUserId());
+        TraditionalBankingInformation accountDetailsToUpdate = traditionalBankingDoa.findByUserId(accountInformation.getOwnerId());
 
         if (accountDetailsToUpdate == null) {
             accountDetailsToUpdate = TraditionalBankingInformation.builder()
-                    .userId(accountInformation.getUserId())
+                    .userId(accountInformation.getOwnerId())
                     .build();
         }
 

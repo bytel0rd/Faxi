@@ -14,5 +14,5 @@ public interface VirtualNubanDao extends PagingAndSortingRepository<VirtualNuban
 
     <S extends VirtualNuban> S save(S entity);
 
-    Optional<VirtualNuban> findByUserId(UUID userId);
+    Optional<VirtualNuban> findByOwnerId(UUID userId);
 }

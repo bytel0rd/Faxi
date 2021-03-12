@@ -13,5 +13,5 @@ public class TraditionalAccountUpdateParam {
     @NonNull
     private String bankAccountNumber;
 
-    private String userId;
+    private String ownerId;
 }

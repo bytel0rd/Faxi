@@ -1,6 +1,5 @@
 package com.avenuer.faxi.wallets.models;
 
-import com.avenuer.faxi.wallets.enums.Currency;
 import com.avenuer.faxi.wallets.enums.PaymentGateway;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,34 +16,41 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "virtual_nubans")
-@EntityListeners(AuditingEntityListener.class)
-public class VirtualNuban {
+@Entity(name = "virtual_cards")
+public class VirtualCard {
 
     @Id
-    @GeneratedValue
     private UUID id;
+    @Column(nullable = false)
     private UUID ownerId;
 
-    private String accountNumber;
-    private String bankName;
-
     @Enumerated(EnumType.STRING)
-    private Currency currency;
-    private Boolean isActive = true;
+    private PaymentGateway provider;
+    private Long accountID;
+    private Boolean isActive;
 
-    private String accountReference;
-    private String issuerReference;
+    private String cardType;
+    private String nameOnCard;
+    private String amount;
+    private String currency;
+    private String cvv;
+    private String expiration;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentGateway issuer;
+    private UUID cardHash;
+    private String cardPan;
+    private String maskedPan;
+
+    private String address1;
+    private String zipCode;
+    private String city;
+    private String state;
 
     private String createdBy;
     private String modifiedBy;
 
+    @CreatedDate
+    private Date dateCreated;
     @LastModifiedDate
     private Date dateModified;
-    @CreatedDate
-    private String dateCreated;
 
 }

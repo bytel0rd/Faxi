@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class FlutterWaveClient {
 
@@ -40,6 +42,8 @@ public class FlutterWaveClient {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"),
                 objectMapper.writeValueAsString(cleanBodyParam(body)));
 
+        System.out.println(objectMapper.writeValueAsString(cleanBodyParam(body)));
+
         Request req = new Request.Builder()
                 .url(appendUrl(url))
                 .post(requestBody)
@@ -47,7 +51,11 @@ public class FlutterWaveClient {
                 .addHeader("Accept", "application/json")
                 .build();
 
-        Call call = client.newCall(req);
+        Call call = client.newBuilder().connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS).build().newCall(req);
+
+//        Call call = client.newCall(req);
         return call.execute();
     }
 

@@ -14,5 +14,5 @@ public class CreateNubanParam {
     private PaymentGateway nubanProvider;
     private Currency currency;
     private String email;
-    private UUID userId;
+    private UUID ownerId;
 }

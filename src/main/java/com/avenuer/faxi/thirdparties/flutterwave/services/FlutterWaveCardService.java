@@ -17,7 +17,7 @@ public class FlutterWaveCardService {
     @Autowired
     private FlutterWaveClient client;
 
-    FlutterWaveCreatedCard create(@NonNull FlutterWaveCardRequest card) {
+    public FlutterWaveCreatedCard create(@NonNull FlutterWaveCardRequest card) {
 
         try {
 
@@ -29,7 +29,11 @@ public class FlutterWaveCardService {
 
             log.info(String.format("FlutterWave: %s", flutterResponse.getMessage()));
 
-            return flutterResponse.getData();
+            if (flutterResponse.getData() != null) {
+                return flutterResponse.getData();
+            }
+
+            throw  new RuntimeException(flutterResponse.getMessage());
 
         } catch (Exception e) {
 

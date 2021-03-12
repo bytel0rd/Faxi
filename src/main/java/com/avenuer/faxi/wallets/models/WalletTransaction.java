@@ -7,10 +7,7 @@ import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -26,6 +23,7 @@ public class WalletTransaction {
 
     private double amount;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TransactionType transactionType;
 
@@ -33,7 +31,7 @@ public class WalletTransaction {
     private String reference;
 
     @Column(nullable = false)
-    private String userId;
+    private String ownerId;
 
     @Column(nullable = false)
     private String modifiedBy;

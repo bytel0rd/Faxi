@@ -30,7 +30,7 @@ public class VirtualNubanService {
 
     public VirtualNuban create(AuthProfile auth, CreateNubanParam nubanReq) {
 
-        Optional<VirtualNuban> nubanInformation = nubanDao.findByUserId(nubanReq.getUserId());
+        Optional<VirtualNuban> nubanInformation = nubanDao.findByOwnerId(nubanReq.getOwnerId());
 
         if (nubanInformation.isPresent()) {
             throw new HttpClientErrorException(HttpStatus.CONFLICT, "Virtual Nuban Already exist for the user");
@@ -41,6 +41,9 @@ public class VirtualNubanService {
         try {
 
             nuban =  nubanProvisionService.create(nubanReq);
+
+            nuban.setOwnerId(nubanReq.getOwnerId());
+            nuban.setCreatedBy(auth.fullName());
 
             nuban = nubanDao.save(nuban);
 
@@ -73,7 +76,7 @@ public class VirtualNubanService {
 
     public VirtualNuban retrieveNubanWithUserId(UUID userId) {
 
-        Optional<VirtualNuban> nubanInformation = nubanDao.findByUserId(userId);
+        Optional<VirtualNuban> nubanInformation = nubanDao.findByOwnerId(userId);
 
         if (nubanInformation.isPresent()) {
             return nubanInformation.get();
@@ -83,7 +86,14 @@ public class VirtualNubanService {
     }
 
     public VirtualNuban update(AuthProfile authProfile, VirtualNuban nuban) {
+        Optional<VirtualNuban> nubanInformation = nubanDao.findByOwnerId(nuban.getOwnerId());
+
+        if (!nubanInformation.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Virtual Nuban Not Found");
+        }
+
         nuban.setModifiedBy(authProfile.fullName());
+
         return nubanDao.save(nuban);
     }
 
