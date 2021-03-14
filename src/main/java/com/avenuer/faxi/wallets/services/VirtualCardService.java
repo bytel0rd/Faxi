@@ -5,7 +5,6 @@ import com.avenuer.faxi.authentication.models.AuthProfile;
 import com.avenuer.faxi.shared.Utilities;
 import com.avenuer.faxi.wallets.dao.VirtualCardDoa;
 import com.avenuer.faxi.wallets.models.VirtualCard;
-import com.avenuer.faxi.wallets.params.CreateNubanParam;
 import com.avenuer.faxi.wallets.params.CreateVirtualCardParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

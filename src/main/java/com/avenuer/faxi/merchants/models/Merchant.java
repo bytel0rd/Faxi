@@ -1,10 +1,12 @@
-package com.avenuer.faxi.wallets.models;
+package com.avenuer.faxi.merchants.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
@@ -18,29 +20,29 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "wallets")
-public class Wallet {
+@Entity(name = "merchants")
+public class Merchant {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    private double availableBalance = 0;
-
-    private double totalBalance = 0;
+    @Column(nullable = false)
+    private UUID ownerId;
 
     @Column(nullable = false)
-    private String modifiedBy;
+    private String name;
+    @Column(nullable = false)
+    private String email;
 
-    @Column(unique = true, nullable = false)
-    private UUID ownerId;
+    @CreatedBy
+    private String createdBy;
+    @LastModifiedBy
+    private String modifiedBy;
 
     @CreatedDate
     private Date dateCreated;
-
     @LastModifiedDate
     private Date dateModified;
 
-    @Column(nullable = false)
-    private String createdBy;
 }
