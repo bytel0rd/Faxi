@@ -10,7 +10,7 @@ RUN mvn clean package -DskipTests
 FROM openjdk:8-jre-alpine3.9
 
 # copy only the artifacts we need from the first stage and discard the rest
-COPY --from=MAVEN_BUILD /Faxi/target/Faxi-0.0.1-SNAPSHOT.jar /billford.jar
+COPY --from=MAVEN_BUILD ./target/Faxi-0.0.1-SNAPSHOT.jar /billford.jar
 
 # set the startup command to execute the jar
 CMD ["java", "-jar", "/billford.jar"]
