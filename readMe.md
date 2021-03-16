@@ -1,12 +1,9 @@
 # Faxi
 - Digitial Wallet
-- Personal Finance managment
 - P2P payment solution / Digital Banking.
 
 Problem statement.
-- Abiodun creates a budget with the income distrubution for the month.
-- Any funds that biodun pays for is added to a section of his budget and paid out
-- A digital reciept is sent to the person who recieves the payment.
+- 
 
 
 ## SLA.
