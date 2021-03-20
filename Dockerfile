@@ -12,7 +12,7 @@ FROM openjdk:8-jre-alpine3.9
 # copy only the artifacts we need from the first stage and discard the rest
 COPY --from=MAVEN_BUILD ./target/Faxi-0.0.1-SNAPSHOT.jar /billford.jar
 
-RUN RUN apk add --update curl
+RUN apk add --update curl
 
 RUN curl -O https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent-all.jar
 
